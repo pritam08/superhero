@@ -1,0 +1,189 @@
+.superhero-grid-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.grid-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 2rem;
+  background: linear-gradient(to right, #D6C7FF, #AB8BFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.superhero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+/* Specific layouts for different numbers of items */
+.superhero-grid[data-item-count="1"] {
+  grid-template-columns: 1fr;
+  max-width: 320px;
+}
+
+.superhero-grid[data-item-count="2"] {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 680px;
+}
+
+.superhero-grid[data-item-count="3"] {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1020px;
+}
+
+/* For 4 or more items, use the responsive auto-fit */
+.superhero-grid:not([data-item-count="1"]):not([data-item-count="2"]):not([data-item-count="3"]) {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Loading state */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  color: var(--color-light-200);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(171, 139, 255, 0.3);
+  border-top: 3px solid #AB8BFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error state */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.retry-btn {
+  background: linear-gradient(to right, #D6C7FF, #AB8BFF);
+  color: #030014;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-dm-sans);
+  transition: all 0.2s ease-in-out;
+}
+
+.retry-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(171, 139, 255, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .superhero-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .superhero-grid-container {
+    padding: 1rem;
+  }
+  
+  .grid-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .superhero-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+    max-width: 600px;
+  }
+  
+  /* Override specific layouts on tablet */
+  .superhero-grid[data-item-count="1"] {
+    max-width: 280px;
+  }
+
+  .superhero-grid[data-item-count="2"] {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 580px;
+  }
+
+  .superhero-grid[data-item-count="3"] {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 580px;
+  }
+}
+
+@media (max-width: 480px) {
+  .superhero-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 280px;
+  }
+  
+  /* All items display in single column on mobile */
+  .superhero-grid[data-item-count="1"],
+  .superhero-grid[data-item-count="2"],
+  .superhero-grid[data-item-count="3"] {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+  }
+}
+
+/* Search-related styles */
+.results-count {
+  text-align: center;
+  color: #a0aec0;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.no-results-container {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: rgba(45, 55, 72, 0.6);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(171, 139, 255, 0.2);
+}
+
+.no-results-message {
+  color: #e2e8f0;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}

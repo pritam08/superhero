@@ -1,0 +1,4 @@
+/* Ensure consistent styling for buttons */
+button {
+  font-family: var(--font-dm-sans);
+}

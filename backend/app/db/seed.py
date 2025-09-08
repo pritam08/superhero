@@ -17,7 +17,7 @@ def fetch_hero(hero_id: int):
 def seed_superheroes(start: int = None, end: int = None):
     create_indexes()
     s = start or settings.SEED_START_ID
-    e = end or settings.SEED_END_ID
+    e = 3 #or settings.SEED_END_ID
     inserted = 0
     for i in range(s, e + 1):
         hero = fetch_hero(i)

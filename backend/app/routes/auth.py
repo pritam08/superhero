@@ -30,6 +30,8 @@ async def register(user_in: UserIn):
 
 @router.post('/login')
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    print("---------------------")
+    print(form_data)
     user = db.users.find_one({'username': form_data.username})
     if not user:
         raise HTTPException(status_code=401, detail='Invalid credentials')
