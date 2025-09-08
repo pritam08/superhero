@@ -226,15 +226,19 @@
 
 /* Power Stats */
 .stats-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
 
 .stat-item {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(214, 199, 255, 0.1);
+  border: 1px solid rgba(214, 199, 255, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
 }
 
 .stat-name {
@@ -243,31 +247,15 @@
   font-weight: 500;
 }
 
-.stat-bar {
-  position: relative;
-  background: rgba(214, 199, 255, 0.1);
-  border-radius: 0.5rem;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-.stat-fill {
-  background: linear-gradient(to right, #D6C7FF, #AB8BFF);
-  height: 100%;
-  border-radius: 0.5rem;
-  transition: width 0.5s ease-in-out;
-  min-width: 2px;
-}
-
-.stat-number {
-  position: absolute;
-  right: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
+.stat-value {
+  font-size: 1rem;
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+  background: rgba(214, 199, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  min-width: 2.5rem;
+  text-align: center;
 }
 
 /* Biography, Appearance, Work */

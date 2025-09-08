@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const API_BASE_URL = 'http://127.0.0.1:8000'
+// Use environment variable or default to development URL
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? '/api'  // In production (Docker), use nginx proxy
+  : 'http://127.0.0.1:8000'  // In development, direct backend connection
 
 // Create axios instance with auth interceptor
 const api = axios.create({

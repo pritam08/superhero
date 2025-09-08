@@ -147,16 +147,11 @@ const SuperheroDetail = ({ hero, onBack, isLiked, onLike }) => {
               <div className="stats-grid">
                 {hero.powerstats && Object.entries(hero.powerstats).map(([key, value]) => (
                   <div key={key} className="stat-item">
-                    <span className="stat-name">{key.charAt(0).toUpperCase() + key.slice(1)}</span>
-                    <div className="stat-bar">
-                      <div 
-                        className="stat-fill" 
-                        style={{ width: `${value || 0}%` }}
-                      ></div>
-                      <span className="stat-number">{value || 'N/A'}</span>
-                    </div>
+                    <span className="stat-name">{key.charAt(0).toUpperCase() + key.slice(1)}:</span>
+                    <span className="stat-value">{value || 'N/A'}</span>
                   </div>
                 ))}
+                {!hero.powerstats && <div style={{color: 'red'}}>No powerstats found!</div>}
               </div>
             </div>
 

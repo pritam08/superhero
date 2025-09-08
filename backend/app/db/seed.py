@@ -2,7 +2,7 @@
 import requests
 import os, sys
 sys.path.append( os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-from app.db.mongodb import db, create_indexes
+from app.db.sqlite_db import SuperheroDatabase, init_database
 from app.core.config import settings
 
 
@@ -15,9 +15,9 @@ def fetch_hero(hero_id: int):
     return None
 
 def seed_superheroes(start: int = None, end: int = None):
-    create_indexes()
+    init_database()
     s = start or settings.SEED_START_ID
-    e = 3 #or settings.SEED_END_ID
+    e = 100 # Change back to full seeding or settings.SEED_END_ID
     inserted = 0
     for i in range(s, e + 1):
         hero = fetch_hero(i)
@@ -33,7 +33,7 @@ def seed_superheroes(start: int = None, end: int = None):
                 "connections": hero.get("connections", {}),
                 "image": hero.get("image", {}),
             }
-            db.superheroes.update_one({"id": hero_obj["id"]}, {"$set": hero_obj}, upsert=True)
+            SuperheroDatabase.insert_or_update_hero(hero_obj)
             inserted += 1
             print(f"Seeded/updated {inserted} heroes")
     print(f"Seeded/updated {inserted} heroes")

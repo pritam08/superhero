@@ -2,7 +2,7 @@ import os, sys
 sys.path.append( os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from fastapi import APIRouter, Query
 from random import sample
-from app.db.mongodb import db
+from app.db.sqlite_db import SuperheroDatabase
 
 router = APIRouter(prefix="/teams", tags=["teams"])
 
@@ -10,9 +10,7 @@ router = APIRouter(prefix="/teams", tags=["teams"])
 def random_team():
     """Generate a random team of 5 superheroes"""
     size = 5
-    heroes = list(db.superheroes.aggregate([{"$sample": {"size": size}}]))
-    for h in heroes:
-        h.pop("_id", None)
+    heroes = SuperheroDatabase.get_random_heroes(size)
     return {
         "team": heroes,
         "team_size": len(heroes),
@@ -23,7 +21,7 @@ def random_team():
 def balanced_team():
     """Generate a balanced team of 5 heroes with good, bad, and neutral alignment"""
     size = 5
-    heroes = list(db.superheroes.find({}, {"_id": 0}))
+    heroes = SuperheroDatabase.find_heroes(limit=1000)  # Get a large sample
     good = [h for h in heroes if h.get("alignment") == "good"]
     bad = [h for h in heroes if h.get("alignment") == "bad"]
     neutral = [h for h in heroes if h.get("alignment") not in ["good", "bad"]]
@@ -83,9 +81,8 @@ def power_based_team(
             "valid_powers": valid_powers
         }
     
-    # Query heroes with the specified minimum power level
-    query = {f"powerstats.{power}": {"$gte": min_power}}
-    heroes = list(db.superheroes.find(query, {"_id": 0}).sort(f"powerstats.{power}", -1))
+    # Query heroes with the specified minimum power level using SQLite
+    heroes = SuperheroDatabase.search_heroes_by_power(power, min_power)
     
     if not heroes:
         return {
@@ -132,23 +129,22 @@ def get_power_stats():
     powers = ["intelligence", "strength", "speed", "durability", "power", "combat"]
     stats = {}
     
+    # Get all heroes to calculate statistics
+    heroes = SuperheroDatabase.find_heroes(limit=1000)  # Get a large sample
+    
     for power in powers:
-        pipeline = [
-            {"$group": {
-                "_id": None,
-                "avg": {"$avg": f"$powerstats.{power}"},
-                "min": {"$min": f"$powerstats.{power}"},
-                "max": {"$max": f"$powerstats.{power}"},
-                "count": {"$sum": 1}
-            }}
-        ]
-        result = list(db.superheroes.aggregate(pipeline))
-        if result:
+        power_values = []
+        for hero in heroes:
+            power_value = hero.get("powerstats", {}).get(power, 0)
+            if isinstance(power_value, (int, float)):
+                power_values.append(power_value)
+        
+        if power_values:
             stats[power] = {
-                "average": round(result[0]["avg"], 2),
-                "minimum": result[0]["min"],
-                "maximum": result[0]["max"],
-                "total_heroes": result[0]["count"]
+                "average": round(sum(power_values) / len(power_values), 2),
+                "minimum": min(power_values),
+                "maximum": max(power_values),
+                "total_heroes": len(power_values)
             }
     
     return {
