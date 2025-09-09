@@ -87,7 +87,10 @@ const SuperheroGrid = ({ searchQuery, selectedHero: propSelectedHero }) => {
       
       // Use the new hero service to get heroes
   const response = await heroService.getHeroes({ limit: 20 })
-  setSuperheroes(response.heroes || [])
+  setSuperheroes(response|| [])
+  console.log("---###########----")
+    console.log(superheroes)
+    console.log("--eeeeeeeee")
     } catch (err) {
       console.error('Error fetching superheroes:', err)
       setError('Failed to load superheroes. Please try again.')

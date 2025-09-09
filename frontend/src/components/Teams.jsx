@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { heroService } from '../services/heroService'
 import SuperheroCard from './SuperheroCard'
 import './Teams.css'
 
@@ -26,8 +26,8 @@ const Teams = () => {
 
   const fetchPowerStats = async () => {
     try {
-  const response = await axios.get('/api/teams/power-stats')
-      setPowerStats(response.data)
+      const data = await heroService.getPowerStats()
+      setPowerStats(data)
     } catch (error) {
       console.error('Error fetching power stats:', error)
     }
@@ -36,15 +36,24 @@ const Teams = () => {
   const generateTeam = async () => {
     setLoading(true)
     try {
-  let url = `/api/teams/${teamType}`
+      let response
       
-      if (teamType === 'power-based') {
-        url += `?power=${selectedPower}`
+      switch (teamType) {
+        case 'random':
+          response = await heroService.generateRandomTeam()
+          break
+        case 'balanced':
+          response = await heroService.generateBalancedTeam()
+          break
+        case 'power-based':
+          response = await heroService.generatePowerBasedTeam(selectedPower)
+          break
+        default:
+          throw new Error('Invalid team type')
       }
       
-      const response = await axios.get(url)
-      setTeam(response.data.team || [])
-      setTeamStats(response.data.team_stats || null)
+      setTeam(response.team || [])
+      setTeamStats(response.team_stats || null)
     } catch (error) {
       console.error('Error generating team:', error)
       setTeam([])

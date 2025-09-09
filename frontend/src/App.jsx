@@ -12,6 +12,16 @@ function App() {
 
   // Check if user is already logged in on app start
   useEffect(() => {
+    // In development, you can add ?clear=true to URL to clear localStorage
+    const urlParams = new URLSearchParams(window.location.search)
+    if (urlParams.get('clear') === 'true') {
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('user')
+      // Remove the query parameter from URL
+      window.history.replaceState({}, document.title, window.location.pathname)
+      return
+    }
+
     const token = localStorage.getItem('access_token')
     const userData = localStorage.getItem('user')
     

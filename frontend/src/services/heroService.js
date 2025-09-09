@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-// Use environment variable or default to development URL
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? '/api'  // In production (Docker), use nginx proxy
-  : 'http://127.0.0.1:8000'  // In development, direct backend connection
+// Direct backend connection (no Docker/nginx proxy)
+const API_BASE_URL = 'http://localhost:8000'
 
 // Create axios instance with auth interceptor
 const api = axios.create({
@@ -56,7 +54,8 @@ export const heroService = {
       if (q) params.q = q
       if (alignment) params.alignment = alignment
       
-      const response = await api.get('/heroes', { params })
+      const response = await api.get('/heroes/', { params })
+      console.log(response.data)
       return response.data
     } catch (error) {
       console.error('Error fetching heroes:', error)
@@ -137,6 +136,57 @@ export const heroService = {
       return response.data
     } catch (error) {
       console.error('Error fetching current user:', error)
+      throw error
+    }
+  },
+
+  // Team services
+  async getTeams() {
+    try {
+      const response = await api.get('/teams/')
+      return response.data
+    } catch (error) {
+      console.error('Error fetching teams:', error)
+      throw error
+    }
+  },
+
+  async generateRandomTeam() {
+    try {
+      const response = await api.get('/teams/random')
+      return response.data
+    } catch (error) {
+      console.error('Error generating random team:', error)
+      throw error
+    }
+  },
+
+  async generateBalancedTeam() {
+    try {
+      const response = await api.get('/teams/balanced')
+      return response.data
+    } catch (error) {
+      console.error('Error generating balanced team:', error)
+      throw error
+    }
+  },
+
+  async generatePowerBasedTeam(power) {
+    try {
+      const response = await api.get(`/teams/power-based?power=${power}`)
+      return response.data
+    } catch (error) {
+      console.error('Error generating power-based team:', error)
+      throw error
+    }
+  },
+
+  async getPowerStats() {
+    try {
+      const response = await api.get('/teams/power-stats')
+      return response.data
+    } catch (error) {
+      console.error('Error fetching power stats:', error)
       throw error
     }
   }

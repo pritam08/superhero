@@ -1,7 +1,7 @@
 from app.db.sqlite_db import SuperheroDatabase
 
 # Check power stats for several heroes
-heroes = SuperheroDatabase.find_heroes(limit=10)
+heroes = SuperheroDatabase.find_heroes(limit=730)
 print("Checking power stats for heroes:")
 print("-" * 50)
 
