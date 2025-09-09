@@ -34,5 +34,5 @@ ENV DATABASE_PATH=/app/data/superheroes.db
 # Expose port
 EXPOSE 8000
 
-# Command to run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Command to check database and then run the application
+CMD ["/bin/sh", "-c", "python check_data.py && uvicorn app.main:app --host 0.0.0.0 --port 8000"]

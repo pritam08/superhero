@@ -49,27 +49,7 @@ docker-compose down
 docker-compose down -v
 ```
 
-### Option 2: Local Development
 
-#### Using Start Scripts (Windows):
-
-**PowerShell Scripts:**
-```powershell
-# Start backend (in one terminal)
-.\start-backend.ps1
-
-# Start frontend (in another terminal)
-.\start-frontend.ps1
-```
-
-**Batch Scripts:**
-```cmd
-# Start backend (in one terminal)
-start-backend.bat
-
-# Start frontend (in another terminal)
-start-frontend.bat
-```
 
 #### Manual Setup:
 

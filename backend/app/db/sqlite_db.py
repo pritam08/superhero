@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 
 # Database file path - use environment variable or default
-DATABASE_PATH = os.getenv('DATABASE_PATH', '/app/data/superheroes.db')
+DATABASE_PATH = os.getenv('DATABASE_PATH', 'C:/Users/Pritam/Desktop/sql_docker/superhero/backend/data/superheroes.db')
 DB_PATH = Path(DATABASE_PATH)
 
 # Ensure the directory exists
