@@ -12,7 +12,7 @@ const SuperheroGrid = ({ searchQuery, selectedHero: propSelectedHero }) => {
   const [selectedHero, setSelectedHero] = useState(null)
   const [isSearching, setIsSearching] = useState(false)
 
-  const BASE_URL = 'http://127.0.0.1:8000/heroes'
+  // Use heroService for all API calls; no hardcoded backend URL
 
   // Load liked heroes from database on component mount
   useEffect(() => {
@@ -86,8 +86,8 @@ const SuperheroGrid = ({ searchQuery, selectedHero: propSelectedHero }) => {
       setError(null)
       
       // Use the new hero service to get heroes
-      const heroes = await heroService.getHeroes({ limit: 20 })
-      setSuperheroes(heroes || [])
+  const response = await heroService.getHeroes({ limit: 20 })
+  setSuperheroes(response.heroes || [])
     } catch (err) {
       console.error('Error fetching superheroes:', err)
       setError('Failed to load superheroes. Please try again.')

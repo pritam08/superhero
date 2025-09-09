@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import auth, users, superheroes, teams
+from app.routes import auth, users, superheroes, teams
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Superhero Backend with FastAPI + MongoDB")

@@ -26,7 +26,7 @@ const Teams = () => {
 
   const fetchPowerStats = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/teams/power-stats')
+  const response = await axios.get('/api/teams/power-stats')
       setPowerStats(response.data)
     } catch (error) {
       console.error('Error fetching power stats:', error)
@@ -36,7 +36,7 @@ const Teams = () => {
   const generateTeam = async () => {
     setLoading(true)
     try {
-      let url = `http://127.0.0.1:8000/teams/${teamType}`
+  let url = `/api/teams/${teamType}`
       
       if (teamType === 'power-based') {
         url += `?power=${selectedPower}`

@@ -28,7 +28,7 @@ COPY . .
 RUN chmod +x start.sh
 
 # Create data directory for SQLite database
-RUN mkdir -p /app/data
+# RUN mkdir -p /app/data
 
 # Expose port
 EXPOSE 8000
