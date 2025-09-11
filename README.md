@@ -95,7 +95,21 @@ npm run dev
 - **Backend API**: http://localhost:8000
 - **API Documentation**: http://localhost:8000/docs
 
-## 📁 Project Structure
+## � Demo Screenshots
+
+### Opening Page
+![Opening Page](demo_img/opening%20page.png)
+
+### Login Page
+![Login Page](demo_img/log_in_page.png)
+
+### Dashboard
+![Dashboard](demo_img/dashboad.png)
+
+### Favorites Page
+![Favorites Page](demo_img/FavoritesPage.png)
+
+## �📁 Project Structure
 
 ```
 superhero/
