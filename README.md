@@ -109,7 +109,7 @@ npm run dev
 ### Favorites Page
 ![Favorites Page](demo_img/FavoritesPage.png)
 
-## �📁 Project Structure
+## 📁 Project Structure
 
 ```
 superhero/
@@ -117,33 +117,70 @@ superhero/
 │   ├── app/
 │   │   ├── main.py              # FastAPI application entry point
 │   │   ├── core/
+│   │   │   └── security.py      # Security utilities
 │   │   ├── db/
+│   │   │   ├── mongodb.py       # MongoDB operations
 │   │   │   ├── sqlite_db.py     # SQLite database operations
-│   │   │   └── seed.py          # Database seeding
+│   │   │   ├── seed.py          # Database seeding
+│   │   │   └── README_SQLITE_CONVERSION.md
 │   │   ├── models/
+│   │   │   ├── superhero.py     # Superhero data models
+│   │   │   ├── team.py          # Team data models
+│   │   │   └── user.py          # User data models
 │   │   ├── routes/
+│   │   │   ├── auth.py          # Authentication routes
+│   │   │   ├── superheroes.py   # Superhero routes
+│   │   │   ├── teams.py         # Team routes
+│   │   │   └── users.py         # User routes
 │   │   └── services/
-│   ├── data/
-│   │   └── superheroes.db       # SQLite database (persistent)
+│   │       ├── compare.py       # Comparison services
+│   │       └── team.py          # Team services
+│   ├── data/                    # Database storage
+│   ├── check_data.py            # Data validation script
+│   ├── test_api_response.py     # API testing script
 │   ├── requirements.txt         # Python dependencies
 │   ├── Dockerfile              # Backend Docker configuration
-│   ├── .dockerignore
-│   └── venv/                    # Python virtual environment (local dev)
+│   ├── start.sh                # Backend startup script
+│   ├── POWER_STATS_FIX.md      # Power stats documentation
+│   └── readme.md               # Backend specific readme
 ├── frontend/
 │   ├── src/
 │   │   ├── components/          # React components
-│   │   ├── services/            # API service layer
-│   │   └── main.jsx            # React entry point
+│   │   │   ├── dashboard.jsx    # Main dashboard component
+│   │   │   ├── FavoritesPage.jsx # Favorites page
+│   │   │   ├── login.jsx        # Login component
+│   │   │   ├── openapp.jsx      # Opening page component
+│   │   │   ├── SearchBar.jsx    # Search functionality
+│   │   │   ├── superhero.jsx    # Superhero component
+│   │   │   ├── SuperheroCard.jsx # Superhero card display
+│   │   │   ├── SuperheroDetail.jsx # Detailed superhero view
+│   │   │   ├── SuperheroGrid.jsx # Grid layout for superheroes
+│   │   │   └── Teams.jsx        # Team management
+│   │   ├── services/
+│   │   │   └── heroService.js   # API service layer
+│   │   ├── App.jsx             # Main React component
+│   │   ├── main.jsx            # React entry point
+│   │   ├── api.js              # API configuration
+│   │   ├── App.css             # Main styles
+│   │   └── index.css           # Global styles
+│   ├── public/
+│   │   ├── logo.png            # Application logo
+│   │   ├── main-bg.png         # Background image
+│   │   ├── search.svg          # Search icon
+│   │   ├── star.svg            # Star icon
+│   │   └── vite.svg            # Vite logo
 │   ├── package.json            # Node.js dependencies
+│   ├── vite.config.js          # Vite configuration
+│   ├── eslint.config.js        # ESLint configuration
+│   ├── index.html              # HTML template
 │   ├── Dockerfile              # Frontend Docker configuration
-│   ├── nginx.conf              # Nginx configuration for production
-│   ├── .dockerignore
-│   └── node_modules/           # Node.js dependencies (local dev)
+│   └── nginx.conf              # Nginx configuration for production
+├── demo_img/                   # Demo screenshots
+│   ├── dashboad.png           # Dashboard screenshot
+│   ├── FavoritesPage.png      # Favorites page screenshot
+│   ├── log_in_page.png        # Login page screenshot
+│   └── opening page.png       # Opening page screenshot
 ├── docker-compose.yml          # Docker services orchestration
-├── start-backend.ps1           # PowerShell script to start backend
-├── start-frontend.ps1          # PowerShell script to start frontend
-├── start-backend.bat           # Batch script to start backend
-├── start-frontend.bat          # Batch script to start frontend
 └── README.md                   # This file
 ```
 
