@@ -1,25 +1,6 @@
 # Superhero Application
 
-A full-stack superhero application with React.js frontend and Python FastAPI ba### 3. Access the Application
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs
-
-## 📁 Project Structureatabase.
-
-## 📸 Demo Screenshots
-
-### Opening Page
-![Opening Page](demo_img/opening%20page.png)
-
-### Login Page
-![Login Page](demo_img/log_in_page.png)
-
-### Dashboard
-![Dashboard](demo_img/dashboad.png)
-
-### Favorites Page
-![Favorites Page](demo_img/FavoritesPage.png)
+A full-stack superhero application with React.js frontend and Python FastAPI backend using SQLite database.
 
 ## 🏗️ Architecture
 
@@ -325,3 +306,4 @@ This project is for educational purposes.
 ---
 
 **Happy coding! 🦸‍♂️🦸‍♀️**
+g
