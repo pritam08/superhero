@@ -119,10 +119,8 @@ superhero/
 │   │   ├── core/
 │   │   │   └── security.py      # Security utilities
 │   │   ├── db/
-│   │   │   ├── mongodb.py       # MongoDB operations
 │   │   │   ├── sqlite_db.py     # SQLite database operations
-│   │   │   ├── seed.py          # Database seeding
-│   │   │   └── README_SQLITE_CONVERSION.md
+│   │   │   └── seed.py          # Database seeding
 │   │   ├── models/
 │   │   │   ├── superhero.py     # Superhero data models
 │   │   │   ├── team.py          # Team data models
@@ -136,12 +134,9 @@ superhero/
 │   │       ├── compare.py       # Comparison services
 │   │       └── team.py          # Team services
 │   ├── data/                    # Database storage
-│   ├── check_data.py            # Data validation script
-│   ├── test_api_response.py     # API testing script
 │   ├── requirements.txt         # Python dependencies
 │   ├── Dockerfile              # Backend Docker configuration
 │   ├── start.sh                # Backend startup script
-│   ├── POWER_STATS_FIX.md      # Power stats documentation
 │   └── readme.md               # Backend specific readme
 ├── frontend/
 │   ├── src/
